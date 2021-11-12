@@ -1,5 +1,6 @@
 
 #include "read_csv.hpp"
+#include "ansi_colors.h"
 
 using namespace std;
 
@@ -7,7 +8,17 @@ int main(int argc, char *argv[])
 {
     csv_obj_t csv_obj;
 
-    csv_obj.file_path = "./big.csv";
+    if (argc > 1)
+    {
+        csv_obj.file_path = argv[1];
+    }
+    else
+    {
+        cerr << RED << "File path not found!" << RESET << endl;
+        cout << "Usage: ./app path/to/file.csv" << endl;
+        return 1;
+    }
+    
     csv_obj.delimiter = ",";
 
     csv_read(&csv_obj);
