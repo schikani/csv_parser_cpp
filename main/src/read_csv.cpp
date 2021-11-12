@@ -4,6 +4,25 @@ using namespace std;
 
 unordered_map<string, uint32_t> u_map;
 
+const string WHITESPACE = " \n\r\t\f\v";
+ 
+string ltrim(const string &s)
+{
+    size_t start = s.find_first_not_of(WHITESPACE);
+    return (start == string::npos) ? "" : s.substr(start);
+}
+ 
+string rtrim(const string &s)
+{
+    size_t end = s.find_last_not_of(WHITESPACE);
+    return (end == string::npos) ? "" : s.substr(0, end + 1);
+}
+ 
+string trim(const string &s) {
+    return rtrim(ltrim(s));
+}
+
+
 // Initialize csv_obj
 void csv_init(csv_obj_t *csv_obj)
 {
@@ -213,7 +232,7 @@ bool csv_cat_to_num_map(string *cat, double *cat_num)
         // String not found in map.
         if (u_map.find((string)str) == u_map.end())
         {
-            u_map[(string)str] = u_map.size() + 1;
+            u_map[(string)str] = u_map.size();
             value = u_map[(string)str];
             result = true;
         }
@@ -308,6 +327,7 @@ csv_obj_t *csv_read(csv_obj_t *csv_obj)
             while ((pos = line.find(csv_obj->delimiter)) != string::npos)
             {
                 token = line.substr(0, pos);
+                token = trim(token);
                 double value;
 
                 if (csv_cat_to_num_map(&token, &value))
@@ -324,6 +344,7 @@ csv_obj_t *csv_read(csv_obj_t *csv_obj)
             if (line.length())
             {
                 double value;
+                line = trim(line);
 
                 if (csv_cat_to_num_map(&line, &value))
                 {

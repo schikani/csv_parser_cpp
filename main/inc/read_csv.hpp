@@ -22,6 +22,10 @@ typedef struct
     uint32_t row;
 } csv_obj_t;
 
+string ltrim(const string &s);
+string rtrim(const string &s);
+string trim(const string &s);
+
 void csv_init(csv_obj_t *csv_obj);
 csv_obj_t *csv_read(csv_obj_t *csv_obj);
 
