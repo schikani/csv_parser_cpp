@@ -1,4 +1,4 @@
-#include "main.hpp"
+
 #include "read_csv.hpp"
 
 using namespace std;
@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     csv_obj_t csv_obj;
 
-    csv_obj.file_path = "./test.csv";
+    csv_obj.file_path = "./big.csv";
     csv_obj.delimiter = ",";
 
     csv_read(&csv_obj);
@@ -53,6 +53,23 @@ int main(int argc, char *argv[])
     cout << "median: " << csv_get_median_by_col(&csv_obj, row_no) << endl;
 
     cout << endl;
+
+    cout << "Count for row: " << row_no << endl;
+    for (auto x: csv_get_count_by_row(&csv_obj, row_no))
+    {
+        cout << x.first << ": " << x.second << endl;
+    }
+    cout << endl;
+
+
+    cout << "Count for col: " << col_no << endl;
+    for (auto x: csv_get_count_by_col(&csv_obj, col_no))
+    {
+        cout << x.first << ": " << x.second << endl;
+    }
+    cout << endl;
+    
+
 
     return 0;
 }

@@ -120,6 +120,44 @@ double csv_get_median_by_col(csv_obj_t *csv_obj, int col_no) {
     return median;
 }
 
+unordered_map<double, uint32_t> csv_get_count_by_row(csv_obj_t *csv_obj, int row_no)
+{
+    unordered_map<double, uint32_t> count_map;
+
+    for (int i = 0; i < csv_obj->col; ++i)
+    {
+        if (count_map.find(csv_obj->data[row_no][i]) == count_map.end())
+        {
+            count_map[csv_obj->data[row_no][i]] = 1;
+        }
+        else
+        {
+            count_map[csv_obj->data[row_no][i]]++;
+        }
+    }
+
+    return count_map;
+}
+
+unordered_map<double, uint32_t> csv_get_count_by_col(csv_obj_t *csv_obj, int col_no)
+{
+    unordered_map<double, uint32_t> count_map;
+
+    for (int i = 0; i < csv_obj->row; ++i)
+    {
+        if (count_map.find(csv_obj->data[i][col_no]) == count_map.end())
+        {
+            count_map[csv_obj->data[i][col_no]] = 1;
+        }
+        else
+        {
+            count_map[csv_obj->data[i][col_no]]++;
+        }
+    }
+
+    return count_map;
+}
+
 
 double csv_cat_to_num_map(string *cat)
 {
