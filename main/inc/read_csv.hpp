@@ -15,12 +15,14 @@ using namespace std;
 typedef struct 
 {
     vector<vector<double>> data;
-    string delimiter;
     string file_path;
+    string delimiter;
+    string map_path;
     uint32_t col;
     uint32_t row;
 } csv_obj_t;
 
+void csv_init(csv_obj_t *csv_obj);
 csv_obj_t *csv_read(csv_obj_t *csv_obj);
 
 double csv_get_min_by_row(csv_obj_t *csv_obj, int row_no);
@@ -33,12 +35,14 @@ double csv_get_max_by_col(csv_obj_t *csv_obj, int col_no);
 double csv_get_mean_by_col(csv_obj_t *csv_obj, int col_no);
 double csv_get_median_by_col(csv_obj_t *csv_obj, int col_no);
 
-double csv_cat_to_num_map(string *cat);
+string csv_get_cat_from_num(uint32_t cat_num);
 
 unordered_map<double, uint32_t> csv_get_count_by_row(csv_obj_t *csv_obj, int row_no);
 unordered_map<double, uint32_t> csv_get_count_by_col(csv_obj_t *csv_obj, int col_no);
 
-
-void csv_write_has_to_file(void);
+// Private Methods
+bool csv_cat_to_num_map(string *cat, double *cat_num);
+int csv_save_cat_to_num_map(string file_name);
+int csv_read_cat_to_num_map(string file_name);
 
 #endif
