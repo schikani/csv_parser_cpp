@@ -255,9 +255,11 @@ int csv_save_cat_to_num_map(string file_name)
 
     for (auto x : u_map)
     {
-        char line[x.first.length() + sizeof(int32_t) + 2] = {0};
+        size_t size = x.first.length() + sizeof(int32_t) + 2;
+        char *line = (char *)malloc(size);
         sprintf(line, "%s,%d\n", x.first.c_str(), x.second);
         file.write(line, strlen(line));
+        free(line);
     }
 
     file.close();
@@ -279,7 +281,7 @@ int csv_read_cat_to_num_map(string file_name)
             uint32_t cat_num;
             getline(file, line);
 
-            if ((pos = line.find(",")) != string::npos)
+            if ((pos = line.find("->")) != string::npos)
             {
                 cat = line.substr(0, pos);
                 cat_num = atoi(line.substr(pos + 1, line.length() - pos - 1).c_str());
