@@ -27,6 +27,8 @@ string rtrim(const string &s);
 string trim(const string &s);
 
 void csv_init(csv_obj_t *csv_obj);
+vector <double>get_row_by_index(csv_obj_t *csv_obj, int row_no);
+vector <double>get_col_by_index(csv_obj_t *csv_obj, int col_no);
 csv_obj_t *csv_read(csv_obj_t *csv_obj);
 
 double csv_get_min_by_row(csv_obj_t *csv_obj, int row_no);

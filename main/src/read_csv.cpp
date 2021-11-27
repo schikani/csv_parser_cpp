@@ -22,6 +22,27 @@ string trim(const string &s) {
     return rtrim(ltrim(s));
 }
 
+vector <double>get_row_by_index(csv_obj_t *csv_obj, int row_no)
+{
+    vector <double> vect;
+    for (int i = 0; i < csv_obj->col; ++i)
+    {
+        vect.push_back(csv_obj->data[row_no][i]);
+    }
+
+    return vect;
+}
+
+vector <double>get_col_by_index(csv_obj_t *csv_obj, int col_no)
+{
+    vector <double> vect;
+    for (int i = 0; i < csv_obj->row; ++i)
+    {
+        vect.push_back(csv_obj->data[i][col_no]);
+    }
+
+    return vect;
+}
 
 // Initialize csv_obj
 void csv_init(csv_obj_t *csv_obj)
